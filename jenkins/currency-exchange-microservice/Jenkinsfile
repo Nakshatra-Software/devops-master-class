@@ -12,28 +12,10 @@ pipeline {
         stage ('Compile Stage') {
 
             steps {
-                withMaven(maven : '3.6.3') {
-                    sh 'mvn clean compile'
+                def mavenHome =  tool name: "3.6.3"
+                def mavenCMD = "${mavenHome}/bin/mvn"
+                sh "${mavenCMD} clean package"
                 }
             }
         }
-
-        stage ('Testing Stage') {
-
-            steps {
-                withMaven(maven : '3.6.3') {
-                    sh 'mvn test'
-                }
-            }
-        }
-
-
-        stage ('Deployment Stage') {
-            steps {
-                withMaven(maven : '3.6.3') {
-                    sh 'mvn package'
-                }
-            }
-        }
-    }
 }
