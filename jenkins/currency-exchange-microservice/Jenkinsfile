@@ -2,6 +2,13 @@ pipeline {
     agent any
 
     stages {
+        
+        stage ('checkout SCM') {
+
+            steps {
+                git 'https://github.com/Nakshatra-Software/devops-master-class.git'
+            }
+        }
         stage ('Compile Stage') {
 
             steps {
