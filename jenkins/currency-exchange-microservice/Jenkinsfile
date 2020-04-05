@@ -12,10 +12,14 @@ pipeline {
         stage ('Compile Stage') {
 
             steps {
-                def mavenHome =  tool name: "3.6.3"
-                def mavenCMD = "${mavenHome}/bin/mvn"
-                sh "${mavenCMD} clean package"
+                withMaven(maven : '3.6.3') {
+                    sh 'git --version'
+                    sh 'java -version'
+                    sh 'mvn --version'
+                    
                 }
             }
         }
+
+      }
 }
